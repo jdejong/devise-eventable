@@ -21,8 +21,8 @@ module Devise
       begin
         block.call(val)
       rescue => e
-        logger.error "[Devise] Eventable.fire_event - #{e.message}" if logger
-        logger.error "[Devise] Eventable.fire_event - #{e.backtrace.inspect}" if logger
+        Rails.logger.error "[Devise] Eventable.fire_event - #{e.message}" if Rails.logger
+        Rails.logger.error "[Devise] Eventable.fire_event - #{e.backtrace.inspect}" if Rails.logger
       end
     end
   end
