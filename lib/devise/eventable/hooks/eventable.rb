@@ -13,7 +13,7 @@ Warden::Manager.before_failure do |env, options|
 end
 
 Warden::Manager.before_logout do |record, warden, options|
-  Devise.fire_event(:logout, { record: record, warden: warden, options: options } )
+  Devise.fire_event(:logout, { record: record, warden: warden, options: options } ) if record
 end
 
 
