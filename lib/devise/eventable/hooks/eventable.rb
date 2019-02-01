@@ -9,7 +9,7 @@ Warden::Manager.after_set_user except: :fetch do |record, warden, options|
 end
 
 Warden::Manager.before_failure do |env, options|
-  Devise.fire_event(:login_failure, { env: env, options: options } )
+  Devise.fire_event(:login_failure, { env: env, options: options } ) if options && options.is_a?(Hash) && !options[:message].blank?
 end
 
 Warden::Manager.before_logout do |record, warden, options|
