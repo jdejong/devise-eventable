@@ -26,11 +26,11 @@ module Devise
 
       if Devise.activerecord51?
         def fire_events_on_model_update
-          Devise.fire_event(:password_change, { record: self } ) if saved_changes_to_encrypted_password?
-          Devise.fire_event(:password_reset_sent, { record: self } ) if saved_changes_to_reset_password_token? && !saved_changes_to_encrypted_password?
-          Devise.fire_event(:password_reset, { record: self } ) if saved_changes_to_encrypted_password? && saved_changes_to_reset_password_token? && reset_password_token.nil?
-          Devise.fire_event(:account_locked, { record: self } ) if saved_changes_to_locked_at? && !locked_at.nil?
-          Devise.fire_event(:account_unlocked, { record: self } ) if saved_changes_to_locked_at? && locked_at.nil?
+          Devise.fire_event(:password_change, { record: self } ) if saved_change_to_encrypted_password?
+          Devise.fire_event(:password_reset_sent, { record: self } ) if saved_change_to_reset_password_token? && !saved_change_to_encrypted_password?
+          Devise.fire_event(:password_reset, { record: self } ) if saved_change_to_encrypted_password? && saved_change_to_reset_password_token? && reset_password_token.nil?
+          Devise.fire_event(:account_locked, { record: self } ) if saved_change_to_locked_at? && !locked_at.nil?
+          Devise.fire_event(:account_unlocked, { record: self } ) if saved_change_to_locked_at? && locked_at.nil?
         end
       else
         def fire_events_on_model_update
