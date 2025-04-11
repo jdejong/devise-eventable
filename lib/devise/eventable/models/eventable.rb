@@ -24,7 +24,8 @@ module Devise
         #end
       end
 
-      if Devise.activerecord51?
+      is_active_record51 = defined?(ActiveRecord) && ActiveRecord.gem_version >= Gem::Version.new("5.1.x")
+      if is_active_record51
         def fire_events_on_model_update
           Devise.fire_event(:password_change, { record: self } ) if saved_change_to_encrypted_password?
           Devise.fire_event(:password_reset_sent, { record: self } ) if saved_change_to_reset_password_token? && !saved_change_to_encrypted_password?
